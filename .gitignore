@@ -106,3 +106,4 @@ venv.bak/
 # visual studio community 2022
 *.pyproj
 .vs/
+runserver.py

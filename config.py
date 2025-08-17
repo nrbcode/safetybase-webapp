@@ -8,7 +8,7 @@ from datetime import timedelta
 from dotenv import load_dotenv
 
 class Config():
-	load_dotenv('.env')
+	load_dotenv()
 
 	CSRF_ENABLED			 = True
 	REMEMBER_COOKIE_DURATION = timedelta(minutes=1)

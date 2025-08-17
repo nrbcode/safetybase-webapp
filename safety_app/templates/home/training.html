@@ -1,0 +1,172 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Training {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="d-block mb-4 mb-md-0">
+        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                <li class="breadcrumb-item">
+                    <a href="/dash">
+                        <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">training</li>
+            </ol>
+        </nav>
+        <h2 class="h4">Training</h2>
+        <p class="mb-0">Keep track of training for each employee on your site.</p>
+    </div>
+    <div class="mb-2 mb-md-0">
+        <a class="btn btn-sm btn-gray-800 d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#add-student">
+            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            New Learner
+        </a>
+        <!-- Modal Content -->
+        <div class="modal fade" id="add-student" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="card p-3 p-lg-4">
+                            <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h2 class="h5 mb-4">New learning record</h2>
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="first_name">First Name</label>
+                                        <input class="form-control" id="first_name" type="text" placeholder="Enter your first name" required name="first_name">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div>
+                                            <label for="last_name">Last Name</label>
+                                            <input class="form-control" id="last_name" type="text" placeholder="Also your last name" required name="last_name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-4">
+                                        <label for="phone">Phone</label>
+                                        <input class="form-control" id="phone" type="number" placeholder="0123 456 789" required name="mobile">
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-gray-800">Add learner</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal Content -->
+    </div>
+</div>
+
+<div class="table-settings mb-4">
+    <div class="row">
+        <div class="col col-md-6 col-lg-3 col-xl-4">
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary">Select course</button>
+                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu py-0" aria-labelledby="dropdownMenuReference">
+                    <li><a class="dropdown-item rounded-top" href={{ url_for('.view_training') }}>All courses</a></li>
+                    {% for num, name in courses.items() %}
+                    <li><a class="dropdown-item {% if num==courses|length %}rounded-bottom{% endif %}" href={{ url_for('.filter_training', course=num) }}>{{ name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% if course %}{{ course }}{% else %}All courses selected.{% endif %}
+    </div>
+</div>
+
+<div class="card card-body border-0 shadow table-wrapper table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="border-gray-200">employee name</th>
+                <th class="border-gray-200">mobile</th>
+                <th class="border-gray-200">courses</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for learner in entries %}
+            <tr>
+                <!-- Item -->
+                <td>
+                    <span class="fw-bold">{{ learner.first_name + " " + learner.last_name }}</span>
+                </td>
+                <td>
+                    <span class="fw-normal">0{{ learner.mobile }}</span>
+                </td>
+                <td>
+                    <div class="me-1">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-default"> -->
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-{{ learner.id }}">
+                            <span class="icon icon-sm">
+                                <span class="ellipsis">...</span>
+                            </span>
+                        </button>
+                        <!-- Modal course-list view/edit -->
+                        <!-- <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true"> -->
+                        <div class="modal fade" id="modal-{{ learner.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel-{{ learner.id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="h6 modal-title" id="modalLabel-{{ learner.id }}">{{ learner }} Tickets</h2>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action={{ url_for('.edit_training', id=learner.id) }} method="post">
+                                            <!-- Checklist -->
+                                            <div class="list-group mx-0" name="cl">
+                                                {% for course_num, course_name in courses.items() %}
+                                                <div class="row py-3">
+                                                    <div class="list-group-item">
+                                                        <div class="form-check">
+                                                            {% if course_name in learner.tickets %}
+                                                            <input class="form-check-input" type="checkbox" value={{ course_num }} id={{ course_name }} name="cl" checked>
+                                                            {% else %}
+                                                            <input class="form-check-input" type="checkbox" value={{ course_num }} id={{ course_name }} name="cl">
+                                                            {% endif %}
+                                                            <label class="form-check-label" for={{ course_name }}>
+                                                                {{ course_name }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            <button type="submit" class="btn btn-outline-secondary">Edit</button>
+                                            <!-- End of checklist -->
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Modal Content -->
+                    </div>
+                </td>
+                <!-- End of Item -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
