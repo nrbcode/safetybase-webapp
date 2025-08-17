@@ -58,10 +58,9 @@ def new_prestart():
         #return jsonify(checklist)
         return redirect(url_for('home_blueprint.index'))
     
-    segment = get_segment(request)
     dt_now = datetime.now()
 
-    return render_template('home/prestart.html', segment=segment, date=dt_now, checklist=enumerate(FIRST_LIST, start=1))
+    return render_template('home/prestart.html', date=dt_now, checklist=enumerate(FIRST_LIST, start=1))
 
 @blueprint.get('prestart/<string:id>')
 @login_required
@@ -87,7 +86,7 @@ def view_reports():
 @login_required
 def incident_report():
     """    Record new safety checklist    """
-
+    
     if request.method == 'POST':
 
         incident = IncidentReport(
@@ -102,7 +101,9 @@ def incident_report():
         
         return redirect(url_for('.view_reports'))
     
-    return render_template('home/incident.html')
+    dt_now = datetime.now()
+
+    return render_template('home/incident.html', date=dt_now)
 
 @login_required
 @blueprint.get("/reports/<string:id>")
@@ -164,9 +165,9 @@ def filter_training(course: int):
 @login_required
 def view_tasks():
     tasks = TaskRecord.objects(author=current_user).order_by('due_date')
-    segment = get_segment(request)
     num_tasks = tasks.count()
     num_active = tasks(complete=False).count()
+    dt_now = datetime.now()
 
     if request.method == 'POST':
         new_task = TaskRecord(**request.form)
@@ -178,7 +179,7 @@ def view_tasks():
         num_active = tasks(complete=False).count()
         #return jsonify(new_task), 201
 
-    return render_template('home/dash.html', tasks=tasks, segment=segment, num_tasks=num_tasks, num_active=num_active)
+    return render_template('home/dash.html', tasks=tasks, date=dt_now, num_tasks=num_tasks, num_active=num_active)
 
 @blueprint.route('dash/edit', methods=['POST'])
 @login_required
