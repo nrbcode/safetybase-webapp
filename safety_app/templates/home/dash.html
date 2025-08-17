@@ -161,8 +161,8 @@
                     <div class="row mb-4">
                         <div class="input-group d-flex flex-row align-items-center">
                             <input name="task" type="text" class="form-control" placeholder="New task..." aria-describedby="task-input" required>
-                            <input name="due_date" type="text" data-datepicker="" class="form-control" 
-                                   placeholder={{ date.date }} value={{ date.date }} required >
+                            <input name="due_date" type="text" data-datepicker="" class="datepicker_input form-control" 
+                                   placeholder={{ date.date() }} required >
                             <button type="submit" class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>

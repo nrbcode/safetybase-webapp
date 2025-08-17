@@ -107,3 +107,4 @@ venv.bak/
 *.pyproj
 .vs/
 runserver.py
+tests.py
