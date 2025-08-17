@@ -5,7 +5,8 @@ To be run on vs-22.
 from os import environ
 from safety_app import create_app # factory
 
-app = create_app('config.ConfigRemoteDev')
+app = create_app('config.ConfigLocalDev')
+#app = create_app('config.ConfigRemoteDev')
 
 # *********************************************************
 

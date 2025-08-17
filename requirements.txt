@@ -1,4 +1,4 @@
-Flask
+flask == 2.2.5
 Gunicorn
 python-dotenv
 flask-login
