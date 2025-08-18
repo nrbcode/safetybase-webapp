@@ -58,7 +58,7 @@ def new_prestart():
         #return jsonify(checklist)
         return redirect(url_for('home_blueprint.index'))
     
-    dt_now = datetime.now()
+    dt_now = datetime.now().strftime('%m/%d/%Y')
 
     return render_template('home/prestart.html', date=dt_now, checklist=enumerate(FIRST_LIST, start=1))
 
@@ -101,7 +101,7 @@ def incident_report():
         
         return redirect(url_for('.view_reports'))
     
-    dt_now = datetime.now()
+    dt_now = datetime.now().strftime('%m/%d/%Y')
 
     return render_template('home/incident.html', date=dt_now)
 
@@ -179,7 +179,13 @@ def view_tasks():
         num_active = tasks(complete=False).count()
         #return jsonify(new_task), 201
 
-    return render_template('home/dash.html', tasks=tasks, date=dt_now, num_tasks=num_tasks, num_active=num_active)
+    return render_template(
+        'home/dash.html', 
+        tasks=tasks, 
+        date=dt_now, 
+        num_tasks=num_tasks, 
+        num_active=num_active
+    )
 
 @blueprint.route('dash/edit', methods=['POST'])
 @login_required
