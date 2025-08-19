@@ -144,14 +144,18 @@
                 </div>
                 <div class="d-flex ms-auto">
                     <!-- Tabs navs -->
-                    <ul class="nav mb-4 pb-2" id="ex1" role="tablist" for="ex1-content" >
-                        <li class="nav-item">
-                            <a class="btn btn-secondary text-dark btn-sm me-2" id="ex1-tab-2" data-mdb-tab-init href="#active-tasks" role="tab"
-                               data-bs-toggle="tab" aria-controls="active-tasks" aria-selected="true">Active tasks</a>
+                    <ul class="nav mb-4 pb-2" id="taskfilter" role="tablist" >
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link btn btn-secondary text-dark btn-sm me-2 active" id="activetasks-tab" data-bs-toggle="tab" data-bs-target="#active-tasks"
+                                    type="button" role="tab" aria-controls="activetasks" aria-selected="true">
+                                Active tasks
+                            </button>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-dark btn-sm me-3" id="ex1-tab-1" data-mdb-tab-init href="#all-tasks" role="tab"
-                               data-bs-toggle="tab" aria-controls="all-tasks" aria-selected="false">All tasks</a>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link btn btn-dark btn-sm me-3" id="alltasks-tab" data-bs-toggle="tab" data-bs-target="#all-tasks"
+                                    type="button" role="tab" aria-controls="alltasks" aria-selected="false">
+                                All tasks
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -161,15 +165,15 @@
                     <div class="row mb-4">
                         <div class="input-group d-flex flex-row align-items-center">
                             <input name="task" type="text" class="form-control" placeholder="New task..." aria-describedby="task-input" required>
-                            <input name="due_date" type="text" data-datepicker="" class="form-control" placeholder="Date to be completed by." required >
+                            <input name="due_date" type="text" data-datepicker="" class="form-control" placeholder="Date to be completed by (mm/dd/yyyy)" required >
                             <button type="submit" class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>
                 </form>
                 <!-- Tabs content -->
-                <div class="tab-content" id="ex1-content">
+                <div class="tab-content" id="taskfilter-content" aria-labelledby="taskfilter" >
                     <!-- Active tasks -->
-                    <div class="tab-pane fade show active" id="active-tasks" role="tabpanel" aria-labelledby="active-tasks">
+                    <div class="tab-pane fade show active" id="active-tasks" role="tabpanel" aria-labelledby="activetasks-tab">
                         <form action={{ url_for('.edit_tasks') }} method="post">
                             <ul class="list-group mb-0">
                                 {% for task in tasks if not task.complete %}
@@ -188,7 +192,7 @@
                         </form>
                     </div>
                     <!-- All tasks, active and completed -->
-                    <div class="tab-pane fade" id="all-tasks" role="tabpanel" aria-labelledby="all-tasks">
+                    <div class="tab-pane fade" id="all-tasks" role="tabpanel" aria-labelledby="alltasks-tab">
                         <form action={{ url_for('.delete_tasks') }} method="post">
                             <ul class="list-group mb-0">
                                 {% for task in tasks %}
