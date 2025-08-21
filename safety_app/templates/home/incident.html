@@ -39,31 +39,21 @@
             <div class="card-body">
                 <form action="incident" method="post">
                     <div class="row mb-4">
+                        <!-- Form -->
                         <div class="col-12 col-md-6">
-                            <!-- Form -->
                             <div class="mb-3">
                                 <label for="employeeName">Employee Name</label>
                                 <input name="employee" type="text" id="employeeName" class="form-control" placeholder="name of employee">
                             </div>
                             <div class="mb-3">
-                                <label for="disabledTextInput">Site of incident</label>
-                                <input name="site" type="text" id="disabledTextInput" class="form-control" placeholder="job site">
-                            </div>
-                            <div class="mb-3">
-                                <label for="supervisor">Supervisor/HSR</label>
+                                <label for="supervisor">Supervisor</label>
                                 <input name="author" type="text" id="supervisor" class="form-control" placeholder={{ session.get('name') }} value={{ session.get('name') }}>
                             </div>
-                            <!-- End of Form -->
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mb-3">
-                                <label for="today">Today's date</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                                    </span>
-                                    <input name="today" data-datepicker="" class="form-control" id="today" type="text" value={{ date }} >
-                                </div>
+                                <label for="disabledTextInput">Site of incident</label>
+                                <input name="site" type="text" id="disabledTextInput" class="form-control" placeholder="job site">
                             </div>
                             <div class="mb-3">
                                 <label for="date">Date of incident</label>
@@ -71,23 +61,18 @@
                                     <span class="input-group-text">
                                         <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                     </span>
-                                    <input name="date" data-datepicker="" class="form-control" id="date" type="text" placeholder="mm/dd/yyyy" required >
+                                    <input name="date" class="form-control" id="datepicker" type="text" data-date-format="dd-mm-yyyy" readonly>
                                 </div>
                             </div>
-                            <!-- Form -->
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload a photograph</label>
-                                <input class="form-control" type="file" id="formFile" disabled>
-                            </div>
-                            <!-- End of Form -->
                         </div>
+                        <!-- End of Form -->
                     </div>
                     <div class="row">
                         <!-- Form -->
                         <div class="my-4">
                             <label for="decription">Description of incident</label>
-                            <textarea name="description" class="form-control" placeholder="Description of the incident based on accounts of witnesses." 
-                                      id="decription" rows="4" required ></textarea>
+                            <textarea name="description" class="form-control" placeholder="Description of the incident based on accounts of witnesses."
+                                      id="decription" rows="4" required></textarea>
                         </div>
                         <!-- End of Form -->
                     </div>
@@ -112,4 +97,20 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            todayBtn: "linked",
+            title: "Bootstrap datepicker"
+        }).datepicker('update', new Date());
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"
+        integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="></script>
+
+{% endblock javascripts %}

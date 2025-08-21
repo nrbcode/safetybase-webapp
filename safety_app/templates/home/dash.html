@@ -88,13 +88,13 @@
                         <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                             <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
                                 <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 480 480" xml:space="preserve">
-                                    <g>
-                                        <g>
-                                        <g>
-                                        <path d="M89.825,404.211c-9.926,0-17.965,8.039-17.965,17.965c0,9.917,8.039,17.965,17.965,17.965c9.926,0,17.965-8.048,17.965-17.965C107.789,412.25,99.75,404.211,89.825,404.211z" />
-                                        <path d="M404.211,404.211c-9.926,0-17.965,8.039-17.965,17.965c0,9.917,8.039,17.965,17.965,17.965c9.926,0,17.965-8.048,17.965-17.965C422.175,412.25,414.136,404.211,404.211,404.211z" />
-                                        <path d="M504.166,257.395h0.009l-78.049-85.863c-5.695-6.261-13.815-9.845-22.268-9.845h-44.562v107.789h151.444C509.484,265.039,507.337,260.871,504.166,257.395z" />
-                                        <path d="M449.123,314.386H512v-26.947H356.774c-8.515,0-15.441-6.925-15.441-15.441V161.684h-20.211c-13.626,0-24.702,11.075-24.702,24.702v110.745l-36.945-67.737l18.639-65.249c0.898-3.126,0.018-6.503-2.291-8.812l-53.895-53.895c-0.979-0.979-2.183-1.725-3.512-2.165l-43.475-14.498l-46.08,124.066c-3.8-1.374-7.833-2.246-12.09-2.246c-2.219,0-4.383,0.269-6.494,0.656l47.607-128.162l-20.309-6.764c-1.689-0.575-3.503-0.62-5.201-0.153l-41.4,11.291l24.612-43.08
+                                <g>
+                                <g>
+                                <g>
+                                <path d="M89.825,404.211c-9.926,0-17.965,8.039-17.965,17.965c0,9.917,8.039,17.965,17.965,17.965c9.926,0,17.965-8.048,17.965-17.965C107.789,412.25,99.75,404.211,89.825,404.211z" />
+                                <path d="M404.211,404.211c-9.926,0-17.965,8.039-17.965,17.965c0,9.917,8.039,17.965,17.965,17.965c9.926,0,17.965-8.048,17.965-17.965C422.175,412.25,414.136,404.211,404.211,404.211z" />
+                                <path d="M504.166,257.395h0.009l-78.049-85.863c-5.695-6.261-13.815-9.845-22.268-9.845h-44.562v107.789h151.444C509.484,265.039,507.337,260.871,504.166,257.395z" />
+                                <path d="M449.123,314.386H512v-26.947H356.774c-8.515,0-15.441-6.925-15.441-15.441V161.684h-20.211c-13.626,0-24.702,11.075-24.702,24.702v110.745l-36.945-67.737l18.639-65.249c0.898-3.126,0.018-6.503-2.291-8.812l-53.895-53.895c-0.979-0.979-2.183-1.725-3.512-2.165l-43.475-14.498l-46.08,124.066c-3.8-1.374-7.833-2.246-12.09-2.246c-2.219,0-4.383,0.269-6.494,0.656l47.607-128.162l-20.309-6.764c-1.689-0.575-3.503-0.62-5.201-0.153l-41.4,11.291l24.612-43.08
                                                         c1.59-2.776,1.581-6.189-0.027-8.964c-1.608-2.776-4.572-4.473-7.77-4.473H8.982C4.015,26.947,0,30.963,0,35.93v161.684v125.754
                                                         v8.982v77.096c0,11.974,9.737,21.711,21.711,21.711h5.955c4.383,30.415,30.549,53.895,62.159,53.895
                                                         c31.609,0,57.775-23.48,62.159-53.895h190.069c4.383,30.415,30.549,53.895,62.159,53.895c31.609,0,57.775-23.48,62.159-53.895
@@ -144,7 +144,7 @@
                 </div>
                 <div class="d-flex ms-auto">
                     <!-- Tabs navs -->
-                    <ul class="nav mb-4 pb-2" id="taskfilter" role="tablist" >
+                    <ul class="nav mb-4 pb-2" id="taskfilter" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link btn btn-secondary text-dark btn-sm me-2 active" id="activetasks-tab" data-bs-toggle="tab" data-bs-target="#active-tasks"
                                     type="button" role="tab" aria-controls="activetasks" aria-selected="true">
@@ -163,15 +163,18 @@
             <div class="card-body p-2">
                 <form action={{ url_for('.view_tasks') }} method="post">
                     <div class="row mb-4">
-                        <div class="input-group d-flex flex-row align-items-center">
-                            <input name="task" type="text" class="form-control" placeholder="New task..." aria-describedby="task-input" required>
-                            <input name="due_date" type="text" data-datepicker="" class="form-control" placeholder="Date to be completed by (mm/dd/yyyy)" required >
-                            <button type="submit" class="btn btn-outline-tertiary">Add</button>
+                        <div class="input-group date" aria-describedby="task-input">
+                            <input name="task" type="text" class="form-control" placeholder="New task..." required>
+                            <span class="input-group-text">
+                                <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            </span>
+                            <input name="due_date" class="form-control" type="text" id="datepicker" data-date-format="dd-mm-yyyy" readonly />
+                            <button class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>
                 </form>
                 <!-- Tabs content -->
-                <div class="tab-content" id="taskfilter-content" aria-labelledby="taskfilter" >
+                <div class="tab-content" id="taskfilter-content" aria-labelledby="taskfilter">
                     <!-- Active tasks -->
                     <div class="tab-pane fade show active" id="active-tasks" role="tabpanel" aria-labelledby="activetasks-tab">
                         <form action={{ url_for('.edit_tasks') }} method="post">
@@ -213,7 +216,7 @@
                             </div>
                         </form>
                     </div>
-                <!-- End Tabs content -->
+                    <!-- End Tabs content -->
                 </div>
             </div>
         </div>
@@ -224,4 +227,20 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-    {% block javascripts %}{% endblock javascripts %}
+    {% block javascripts %}
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            todayBtn: "linked",
+            title: "Bootstrap datepicker"
+        }).datepicker('update', new Date());
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"
+        integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="></script>
+
+{% endblock javascripts %}

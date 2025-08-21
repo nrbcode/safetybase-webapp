@@ -58,9 +58,7 @@ def new_prestart():
         #return jsonify(checklist)
         return redirect(url_for('home_blueprint.index'))
     
-    dt_now = datetime.now().strftime('%m/%d/%Y')
-
-    return render_template('home/prestart.html', date=dt_now, checklist=enumerate(FIRST_LIST, start=1))
+    return render_template('home/prestart.html', checklist=enumerate(FIRST_LIST, start=1))
 
 @blueprint.get('prestart/<string:id>')
 @login_required
@@ -93,7 +91,6 @@ def incident_report():
             author = current_user,
             employee = request.form["employee"],
             job_site = request.form["site"],
-            form_date = request.form["today"],
             incident_date = request.form["date"],
             description = request.form["description"]
         )
@@ -101,9 +98,9 @@ def incident_report():
         
         return redirect(url_for('.view_reports'))
     
-    dt_now = datetime.now().strftime('%m/%d/%Y')
+    #dt_now = datetime.now().strftime('%m/%d/%Y')
 
-    return render_template('home/incident.html', date=dt_now)
+    return render_template('home/incident.html')
 
 @login_required
 @blueprint.get("/reports/<string:id>")
