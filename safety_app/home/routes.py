@@ -164,7 +164,6 @@ def view_tasks():
     tasks = TaskRecord.objects(author=current_user).order_by('due_date')
     num_tasks = tasks.count()
     num_active = tasks(complete=False).count()
-    dt_now = datetime.now().strftime('%d/%m/%Y')
 
     if request.method == 'POST':
         new_task = TaskRecord(**request.form)
@@ -178,9 +177,8 @@ def view_tasks():
 
     return render_template(
         'home/dash.html', 
-        tasks=tasks, 
-        date=dt_now, 
-        num_tasks=num_tasks, 
+        tasks=tasks,
+        num_tasks=num_tasks,
         num_active=num_active
     )
 

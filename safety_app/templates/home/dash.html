@@ -3,11 +3,7 @@
 {% block title %} Dashboard {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-{% endblock stylesheets %}
+{% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
@@ -167,13 +163,13 @@
             <div class="card-body p-2">
                 <form action={{ url_for('.view_tasks') }} method="post">
                     <div class="row mb-4">
-                        <div class="input-group" aria-describedby="task-input">
+                        <div class="input-group" aria-describedby="date-input">
                             <input name="task" type="text" class="form-control" placeholder="New task..." required />
                             <span class="input-group-text">
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                             <input name="due_date" class="form-control date" type="text" data-date-format="mm/dd/yyyy" 
-                                   placeholder="Due date (mm/dd/yyyy)" required id="myDatepicker" readonly />
+                                   placeholder="Due date (mm/dd/yyyy)" required id="taskDatepicker" />
                             <button class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>
@@ -232,17 +228,12 @@
 {% endblock content %}
 
 {% block javascripts %}
-<!-- jQuery (required for Bootstrap and Datepicker) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Bootstrap Datepicker JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 <script>
     $(document).ready(function () {
-        $('#myDatepicker').datepicker({
+        $('#taskDatepicker').datepicker({
             autoclose: true,     // Close datepicker when date is selected
-            todayHighlight: true, // Highlight today's date
-            timeZone: "Europe/London"
+            todayHighlight: true // Highlight today's date
         });
     });
 </script>
