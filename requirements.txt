@@ -1,7 +1,7 @@
 flask == 2.2.5
 Gunicorn
 python-dotenv
+python-dateutil
 flask-login
 flask-bcrypt
 flask-mongoengine
-
