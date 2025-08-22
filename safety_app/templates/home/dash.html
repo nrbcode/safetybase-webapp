@@ -172,8 +172,8 @@
                             <span class="input-group-text">
                                 <i class="far fa-calendar-alt"></i>
                             </span>
-                            <input id="due_date" class="form-control" type="text" data-datepicker=""
-                                   placeholder="Add completion date (mm/dd/yyyy)" required />
+                            <input name="due_date" class="form-control" type="text" data-datepicker=""
+                                   placeholder="Due date (mm/dd/yyyy)" required id="date-input" />
                             <button class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>
@@ -245,7 +245,8 @@
 </script>
 -->
 <script>
-    const elem = document.querySelector('input[name="due_date"]');
+    //const elem = document.querySelector('input[name="due_date"]');
+    const elem = document.getElementById('date-input');
     const datepicker = new Datepicker(elem, {
         // ...options
         format: "dd/mm/yyyy",
