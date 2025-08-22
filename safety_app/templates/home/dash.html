@@ -163,12 +163,13 @@
             <div class="card-body p-2">
                 <form action={{ url_for('.view_tasks') }} method="post">
                     <div class="row mb-4">
-                        <div class="input-group date" aria-describedby="task-input">
-                            <input name="task" type="text" class="form-control" placeholder="New task..." required>
+                        <div class="input-group" aria-describedby="task-input">
+                            <input name="task" type="text" class="form-control" placeholder="New task..." required />
                             <span class="input-group-text">
-                                <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                <i class="far fa-calendar-alt"></i>
                             </span>
-                            <input name="due_date" class="form-control" type="text" id="datepicker" data-date-format="mm/dd/yyyy" readonly />
+                            <input name="due_date" data-datepicker="" class="form-control" type="text" 
+                                   placeholder="pick a date to be completed by" required readonly />
                             <button class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>
@@ -227,20 +228,4 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-    {% block javascripts %}
-
-<script>
-    $(function () {
-        $("#datepicker").datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            todayBtn: "linked",
-            title: "Bootstrap datepicker"
-        }).datepicker('update', new Date());
-    });
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"
-        integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="></script>
-
-{% endblock javascripts %}
+{% block javascripts %}{% endblock javascripts %}

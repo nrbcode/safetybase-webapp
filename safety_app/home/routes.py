@@ -47,7 +47,6 @@ def new_prestart():
             author=current_user,
             checklist={safety_item: request.form[str(list_num)] for list_num, safety_item in enumerate(FIRST_LIST, start=1)},
             job_site=request.form["job_site"],
-            job_date=request.form["job_date"],
             job_activity=request.form["job_activity"],
             comments=request.form["comments"],
             weather_conditions=request.form["weather_conditions"],
@@ -58,6 +57,7 @@ def new_prestart():
         #return jsonify(checklist)
         return redirect(url_for('home_blueprint.index'))
     
+    #dt_now = datetime.now().strftime('%d/%m/%Y')
     return render_template('home/prestart.html', checklist=enumerate(FIRST_LIST, start=1))
 
 @blueprint.get('prestart/<string:id>')
