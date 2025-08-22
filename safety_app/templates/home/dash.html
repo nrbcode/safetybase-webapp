@@ -3,7 +3,11 @@
 {% block title %} Dashboard {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/danruggi/datepicker/css/deskyCal.css' onload="this.media='all'">
+
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -168,8 +172,8 @@
                             <span class="input-group-text">
                                 <i class="far fa-calendar-alt"></i>
                             </span>
-                            <input name="due_date" data-datepicker="" class="form-control" type="text" 
-                                   placeholder="pick a date to be completed by" required readonly />
+                            <input id="due_date" class="form-control" type="text" data-datepicker=""
+                                   placeholder="Add completion date (mm/dd/yyyy)" required />
                             <button class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>
@@ -217,8 +221,8 @@
                             </div>
                         </form>
                     </div>
-                    <!-- End Tabs content -->
                 </div>
+                <!-- End Tabs content -->
             </div>
         </div>
     </div>
@@ -227,5 +231,27 @@
 
 {% endblock content %}
 
-<!-- Specific Page JS goes HERE  -->
+<!-- Specific Page JS goes HERE
+    <script>
+    import { Datepicker } from 'vanillajs-datepicker';
+
+    const elem = document.querySelector('input[name="due_date"]');
+    const datepicker = new Datepicker(elem, {
+        // ...options
+        format: "dd/mm/yyyy",
+        autohide: true,
+        todayHighlight: true
+    });
+</script>
+-->
+<script>
+    const elem = document.querySelector('input[name="due_date"]');
+    const datepicker = new Datepicker(elem, {
+        // ...options
+        format: "dd/mm/yyyy",
+        autohide: true,
+        todayHighlight: true
+    });
+</script>
+
 {% block javascripts %}{% endblock javascripts %}

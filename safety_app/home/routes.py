@@ -48,6 +48,7 @@ def new_prestart():
             checklist={safety_item: request.form[str(list_num)] for list_num, safety_item in enumerate(FIRST_LIST, start=1)},
             job_site=request.form["job_site"],
             job_activity=request.form["job_activity"],
+            job_date=request.form["job_date"],
             comments=request.form["comments"],
             weather_conditions=request.form["weather_conditions"],
             number_of_workers=request.form["number_of_workers"]
@@ -57,8 +58,9 @@ def new_prestart():
         #return jsonify(checklist)
         return redirect(url_for('home_blueprint.index'))
     
-    #dt_now = datetime.now().strftime('%d/%m/%Y')
-    return render_template('home/prestart.html', checklist=enumerate(FIRST_LIST, start=1))
+    dt_now = datetime.now().strftime('%d/%m/%Y')
+
+    return render_template('home/prestart.html', checklist=enumerate(FIRST_LIST, start=1), date=dt_now)
 
 @blueprint.get('prestart/<string:id>')
 @login_required
@@ -98,8 +100,6 @@ def incident_report():
         
         return redirect(url_for('.view_reports'))
     
-    #dt_now = datetime.now().strftime('%m/%d/%Y')
-
     return render_template('home/incident.html')
 
 @login_required
@@ -164,7 +164,7 @@ def view_tasks():
     tasks = TaskRecord.objects(author=current_user).order_by('due_date')
     num_tasks = tasks.count()
     num_active = tasks(complete=False).count()
-    dt_now = datetime.now()
+    dt_now = datetime.now().strftime('%d/%m/%Y')
 
     if request.method == 'POST':
         new_task = TaskRecord(**request.form)
