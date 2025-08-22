@@ -172,8 +172,8 @@
                             <span class="input-group-text">
                                 <i class="far fa-calendar-alt"></i>
                             </span>
-                            <input name="due_date" class="form-control date" type="text" data-date-format="dd/mm/yyyy" 
-                                   placeholder="Due date (dd/mm/yyyy)" required id="myDatepicker" />
+                            <input name="due_date" class="form-control date" type="text" data-date-format="mm/dd/yyyy" 
+                                   placeholder="Due date (mm/dd/yyyy)" required id="myDatepicker" readonly />
                             <button class="btn btn-outline-tertiary">Add</button>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
         $('#myDatepicker').datepicker({
             autoclose: true,     // Close datepicker when date is selected
             todayHighlight: true, // Highlight today's date
-            timeZone: "Europe/London",
+            timeZone: "Europe/London"
         });
     });
 </script>
