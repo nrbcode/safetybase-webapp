@@ -22,7 +22,7 @@ def view_prestarts():
 
     """    Table of pre-start records.    """
     page_num = int(request.args.get("page") or 1)
-    entries = CheckList.objects().order_by('-job_date').paginate(page=page_num, per_page=2)
+    entries = CheckList.objects(author=current_user).order_by('-job_date').paginate(page=page_num, per_page=2)
     
     # Detect the current page
     segment = get_segment(request)
@@ -119,8 +119,9 @@ def view_training():
 
     """     Show list of courses completed     """
     courses = COURSE_DICT
-    entries = CourseLearner.objects(author=current_user)
+    entries = CourseLearner.objects()
 
+    # Detect the current page
     segment = get_segment(request)
 
     if request.method == 'POST':
@@ -143,7 +144,6 @@ def edit_training(id: str):
     learner.update(**edit)
 
     #return jsonify(learner)
-    #return redirect(url_for('home_blueprint.index'))
     return redirect(url_for('.view_training'))
 
 @blueprint.route('training/<int:course>', methods=["GET", "POST"])
@@ -151,7 +151,7 @@ def edit_training(id: str):
 def filter_training(course: int):
     """     Show list of courses completed     """
     courses = COURSE_DICT
-    entries = CourseLearner.objects(author=current_user, tickets__contains=courses[course])
+    entries = CourseLearner.objects(tickets__contains=courses[course])
     segment = get_segment(request)
     
     return render_template('home/training.html', entries=entries, courses=courses, segment=segment, course=courses[course])
@@ -165,6 +165,9 @@ def view_tasks():
     num_tasks = tasks.count()
     num_active = tasks(complete=False).count()
 
+    # Detect the current page
+    segment = get_segment(request)
+
     if request.method == 'POST':
         new_task = TaskRecord(**request.form)
         new_task['author'] = current_user
@@ -176,7 +179,8 @@ def view_tasks():
         #return jsonify(new_task), 201
 
     return render_template(
-        'home/dash.html', 
+        'home/dash.html',
+        segment=segment,
         tasks=tasks,
         num_tasks=num_tasks,
         num_active=num_active

@@ -22,6 +22,7 @@
         </nav>
         <h2 class="h4">Training</h2>
         <p class="mb-0">Keep track of training for each employee on your site.</p>
+        <p class="mb-0">HSRs can view all learners, but edit only those added by themselves.</p>
     </div>
     <div class="mb-2 mb-md-0">
         <a class="btn btn-sm btn-gray-800 d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#add-student">
@@ -146,7 +147,11 @@
                                                 </div>
                                                 {% endfor %}
                                             </div>
+                                            {% if learner.author == current_user %}
                                             <button type="submit" class="btn btn-outline-secondary">Edit</button>
+                                            {% else %}
+                                            <button type="submit" class="btn btn-outline-secondary" disabled>Edit</button>
+                                            {% endif %}
                                             <!-- End of checklist -->
                                         </form>
                                     </div>
