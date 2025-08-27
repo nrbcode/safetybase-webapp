@@ -10,7 +10,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+#dist/
 downloads/
 eggs/
 .eggs/
@@ -108,3 +108,9 @@ venv.bak/
 .vs/
 runserver.py
 tests.py
+
+# vendor distributions
+notyf/
+onscreen/
+simplebar/
+smooth-scroll/
