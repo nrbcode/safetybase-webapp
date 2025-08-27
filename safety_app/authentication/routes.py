@@ -86,7 +86,6 @@ def login():
 
     return render_template('account/login.html', form=login_form, msg=msg)
 
-
 @blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     create_account_form = CreateAccountForm(request.form)
@@ -126,12 +125,16 @@ def logout():
     #return redirect(url_for('authentication_blueprint.login'))
     return render_template('home/index.html')
 
-@blueprint.route('/profile', methods=['POST'])
+@blueprint.route('/profile', methods=['GET', 'POST'])
 @login_required
-def edit_user():    
-    current_user.update(**request.form)
+def user_profile():
+    if request.method == 'POST':
+        current_user.update(**request.form)
 
-    return redirect('profile.html')
+        # display updated profile by redirection
+        return redirect(url_for('.user_profile'))
+
+    return render_template('account/profile.html')
 
 @blueprint.route('/user_info', methods=['GET'])
 @login_required
@@ -157,6 +160,7 @@ def session_example():
     else:
         session['visits'] = 1
     return f'Visits: {session.get("visits")}'
+
 
 # Errors
 

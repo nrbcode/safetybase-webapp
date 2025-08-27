@@ -26,22 +26,22 @@
     <div class="col-12 col-xl-8">
         <div class="card card-body border-0 shadow mb-4">
             <h2 class="h5 mb-4">General information</h2>
-            <form action={{ url_for('authentication_blueprint.edit_user') }} method="post" >
+            <form name="updateDetails" action={{ url_for('authentication_blueprint.user_profile') }} onsubmit="return validateForm()" method="post" >
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div>
                             <label for="first_name">First Name</label>
-                            <input class="form-control" id="first_name" type="text" name="first_name" required 
-                                   value="{% if current_user.first_name %}{{ current_user.first_name }}{% else %}{{ current_user.username }}{% endif %}" 
-                                   placeholder="{% if current_user.first_name %}{{ current_user.first_name }}{% else %}{{ current_user.username }}{% endif %}" >
+                            <input class="form-control" id="first_name" type="text" name="first_name" required
+                                   value="{% if current_user.first_name %}{{ current_user.first_name }}{% else %}{{ current_user.username }}{% endif %}"
+                                   placeholder="{% if current_user.first_name %}{{ current_user.first_name }}{% else %}{{ current_user.username }}{% endif %}">
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div>
                             <label for="last_name">Last Name</label>
-                            <input class="form-control" id="last_name" type="text" name="last_name" required 
-                                   value="{% if current_user.last_name %}{{ current_user.last_name }}{% else %}{% endif %}" 
-                                   placeholder="{% if current_user.last_name %}{{ current_user.last_name }}{% else %}Also your last name {% endif %}" >
+                            <input class="form-control" id="last_name" type="text" name="last_name" required
+                                   value="{% if current_user.last_name %}{{ current_user.last_name }}{% endif %}"
+                                   placeholder="{% if current_user.last_name %}{{ current_user.last_name }}{% else %}Also your last name {% endif %}">
                         </div>
                     </div>
                 </div>
@@ -49,15 +49,15 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input class="form-control" id="email" type="email" placeholder={{ current_user.email }} readonly >
+                            <input class="form-control" id="email" type="email" placeholder={{ current_user.email }} readonly>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input class="form-control" id="phone" type="number" name="mobile" required 
+                            <input class="form-control" id="phone" type="number" name="mobile" required
                                    value="{% if current_user.mobile %}0{{ current_user.mobile }}{% endif %}"
-                                   placeholder="{% if current_user.mobile %}0{{ current_user.mobile }}{% else %}0123 456 789{% endif %}" >
+                                   placeholder="{% if current_user.mobile %}0{{ current_user.mobile }}{% else %}0123 456 789{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             </form>
         </div>
         <div class="card card-body border-0 shadow mb-4 mb-xl-0">
-            <h2 class="h5 mb-4">Preferences</h2>
+            <h2 class="h5 mb-4">Preferences (not yet available)</h2>
             <form>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
@@ -188,4 +188,33 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+
+<script>
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-gray'
+        },
+        buttonsStyling: false
+    });
+
+    function validateForm() {
+        let first = document.forms["updateDetails"]["first_name"];
+        let last = document.forms["updateDetails"]["last_name"];
+        let mob = document.forms["updateDetails"]["mobile"];
+
+        if (first.value == first.defaultValue && last.value == last.defaultValue && mob.value == mob.defaultValue) {
+            //alert("Some detail must be altered.");
+            swalWithBootstrapButtons.fire(
+                "Wait a minute!",
+                "You didn't update any details.",
+                "info"
+            )
+            return false;
+        }
+
+    }
+</script>
+
+{% endblock javascripts %}
