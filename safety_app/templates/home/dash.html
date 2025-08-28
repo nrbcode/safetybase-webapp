@@ -3,12 +3,7 @@
 {% block title %} Dashboard {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}
-
-<!-- Vanilla JS Datepicker -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">
-
-{% endblock stylesheets %}
+{% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
@@ -232,18 +227,4 @@
 
 {% endblock content %}
 
-{% block javascripts %}
-
-<!-- Vanilla JS Datepicker -->
-<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#taskDatepicker').datepicker({
-            autoclose: true,     // Close datepicker when date is selected
-            todayHighlight: true // Highlight today's date
-        });
-    });
-</script>
-
-{% endblock javascripts %}
+{% block javascripts %}{% endblock javascripts %}
