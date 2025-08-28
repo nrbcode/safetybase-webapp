@@ -112,3 +112,4 @@ tests.py
 # vendor distributions
 vendor/
 !vendor/sweetalert2/
+!vendor/vanillajs-datepicker/
