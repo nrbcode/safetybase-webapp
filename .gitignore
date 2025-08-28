@@ -10,7 +10,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-#dist/
+dist/
 downloads/
 eggs/
 .eggs/
@@ -110,7 +110,5 @@ runserver.py
 tests.py
 
 # vendor distributions
-notyf/
-onscreen/
-simplebar/
-smooth-scroll/
+vendor/
+!vendor/sweetalert2/
