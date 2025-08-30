@@ -4,14 +4,13 @@ Home routes and views
 """
 from datetime import datetime
 #import json
-#from flask import jsonify
 
 from jinja2 import TemplateNotFound
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 
 from ..home import blueprint
-from ..home.models import CheckList, IncidentReport, CourseLearner, TaskRecord
+from ..home.models import CheckList, TaggedTool, IncidentReport, CourseLearner, TaskRecord
 from ..home.constants import FIRST_LIST, COURSE_LIST
 
 COURSE_DICT = dict(enumerate(COURSE_LIST, start=1))
@@ -158,6 +157,30 @@ def filter_training(course: int):
 
 
 #******************************************************************************
+@blueprint.route('/corded-tools', methods=['GET', 'POST'])
+@login_required
+def view_tools():
+
+    """ View and update list of corded tools. """
+    if request.method == 'POST':
+        tool = TaggedTool(**request.form)
+        tool.save()
+
+    tools = TaggedTool.objects()
+    dt_now = datetime.now().strftime('%m/%d/%Y')
+
+    return render_template('home/corded-tools.html', tools=tools, date=dt_now)
+
+@blueprint.get('/corded-tools/<string:id>')
+@login_required
+def delete_tool(id):
+    tool = TaggedTool.objects(id=id)
+    tool.delete()
+    #return jsonify(str(id)), 200
+
+    return redirect(url_for('.view_tools'))
+
+#******************************************************************************
 @blueprint.route('/dash', methods=['GET', 'POST'])
 @login_required
 def view_tasks():
@@ -206,6 +229,7 @@ def delete_tasks():
     tasks_to_delete.delete()
 
     return redirect(url_for('.view_tasks'))
+
 
 #******************************************************************************
 @blueprint.route('/index', methods=['GET', 'POST'])

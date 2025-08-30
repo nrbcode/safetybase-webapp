@@ -85,3 +85,22 @@ class TaskRecord(db.Document):
 
     def display_date(self):
         return self.due_date.strftime('%A %d %B %Y')
+
+class TaggedTool(db.Document):
+
+    author = db.ReferenceField(User)
+    tag_date = db.DateTimeField(required=True)
+    name = db.StringField(required=True, max_length=40)
+    brand = db.StringField(max_length=20)
+    model = db.StringField(max_length=20)
+    serial = db.StringField(max_length=20)
+    description = db.StringField(max_length=50)
+
+    def __str__(self):
+        return f"{self.brand}, {self.name}."
+
+    def display_date(self):
+        return self.tag_date.strftime('%A %d %B %Y')
+
+    def months_passed(self):
+        return round((datetime.now() - self.tag_date).days / 30, 2)
