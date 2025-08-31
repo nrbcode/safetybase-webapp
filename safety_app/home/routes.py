@@ -161,11 +161,12 @@ def filter_training(course: int):
 @login_required
 def view_tools():
 
-    """ View and update list of corded tools. """
+    """ Create and view list of corded tools. """
     
     segment = get_segment(request)
     if request.method == 'POST':
         tool = TaggedTool(**request.form)
+        tool.author = current_user
         tool.save()
 
     tools = TaggedTool.objects(author=current_user)

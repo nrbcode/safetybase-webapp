@@ -66,7 +66,7 @@
                                         <span class="input-group-text">
                                             <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                                         </span>
-                                        <input name="model" type="text" class="form-control" id="model" autofocus >
+                                        <input name="model" type="text" class="form-control" id="model" autofocus autocomplete="off" >
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
@@ -75,7 +75,7 @@
                                         <span class="input-group-text">
                                             <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                                         </span>
-                                        <input name="serial" type="text" class="form-control" id="serial" autofocus >
+                                        <input name="serial" type="text" class="form-control" id="serial" autofocus autocomplete="off" >
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
@@ -84,7 +84,7 @@
                                         <span class="input-group-text" id="basic-addon2">
                                             <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
                                         </span>
-                                        <input name="description" type="text" class="form-control" id="description" >
+                                        <input name="description" type="text" class="form-control" id="description" autocomplete="off" required >
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
@@ -140,13 +140,13 @@
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu py-0">
-                            <a class="dropdown-item rounded-top" data-bs-toggle="modal" data-bs-target="#view-tool"><span class="fas fa-eye me-2"></span>View Details</a>
+                            <a class="dropdown-item rounded-top" data-bs-toggle="modal" data-bs-target="#view-tool-{{ tool.id }}"><span class="fas fa-eye me-2"></span>View Details</a>
                             <a class="dropdown-item" href={{ url_for('.tag_tool', id=tool.id) }}><span class="fas fa-edit me-2"></span>Tag today</a>
                             <a class="dropdown-item text-danger rounded-bottom" href={{ url_for('.delete_tool', id=tool.id) }}><span class="fas fa-trash-alt me-2"></span>Remove</a>
                         </div>
                     </div>
                     <!-- Tool Action - Modal Content -->
-                    <div class="modal fade" id="view-tool" tabindex="-1" role="dialog" aria-labelledby="modal-view-tool" aria-hidden="true">
+                    <div class="modal fade" id="view-tool-{{ tool.id }}" tabindex="-1" role="dialog" aria-labelledby="modal-view-tool-{{ tool.id }}" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-body p-0">
