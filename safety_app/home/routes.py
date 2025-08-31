@@ -171,6 +171,15 @@ def view_tools():
 
     return render_template('home/corded-tools.html', tools=tools, date=dt_now)
 
+@blueprint.get('/corded-tools/tag/<string:id>')
+@login_required
+def tag_tool(id):
+    tool = TaggedTool.objects(id=id).first()
+    tool.tag_date = datetime.now()
+    tool.save()
+
+    return redirect(url_for('.view_tools'))
+
 @blueprint.get('/corded-tools/<string:id>')
 @login_required
 def delete_tool(id):
@@ -179,6 +188,7 @@ def delete_tool(id):
     #return jsonify(str(id)), 200
 
     return redirect(url_for('.view_tools'))
+
 
 #******************************************************************************
 @blueprint.route('/dash', methods=['GET', 'POST'])
