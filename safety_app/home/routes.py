@@ -162,30 +162,33 @@ def filter_training(course: int):
 def view_tools():
 
     """ View and update list of corded tools. """
+    
+    segment = get_segment(request)
     if request.method == 'POST':
         tool = TaggedTool(**request.form)
         tool.save()
 
-    tools = TaggedTool.objects()
+    tools = TaggedTool.objects(author=current_user)
     dt_now = datetime.now().strftime('%m/%d/%Y')
 
-    return render_template('home/corded-tools.html', tools=tools, date=dt_now)
+    return render_template('home/corded-tools.html', tools=tools, date=dt_now, segment=segment)
 
-@blueprint.get('/corded-tools/tag/<string:id>')
+@blueprint.get('/corded-tools/<string:id>/tag')
 @login_required
 def tag_tool(id):
-    tool = TaggedTool.objects(id=id).first()
-    tool.tag_date = datetime.now()
-    tool.save()
+
+    """  Tag tool with today's date """
+    TaggedTool.objects(id=id).update_one(set__tag_date=datetime.now())
 
     return redirect(url_for('.view_tools'))
 
 @blueprint.get('/corded-tools/<string:id>')
 @login_required
 def delete_tool(id):
+
+    """  Remove tool from register.  """
     tool = TaggedTool.objects(id=id)
     tool.delete()
-    #return jsonify(str(id)), 200
 
     return redirect(url_for('.view_tools'))
 
