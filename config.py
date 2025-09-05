@@ -11,7 +11,7 @@ class Config():
 	load_dotenv()
 
 	CSRF_ENABLED			 = True
-	REMEMBER_COOKIE_DURATION = timedelta(minutes=1)
+	REMEMBER_COOKIE_DURATION = timedelta(days=1)
 	SECRET_KEY				 = environ.get('SECRET_KEY')
 
 class ConfigRemoteDev(Config):
